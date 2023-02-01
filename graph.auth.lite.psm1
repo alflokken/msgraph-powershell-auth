@@ -150,8 +150,8 @@ function Get-GraphToken {
                 $codeflowPayload = @{}
                 # used to avoid cross site request forgery (not required, but recommended)
                 $codeflowPayload.state = [guid]::NewGuid()
-                # PKCE - code_challenge secret
-                $codeflowPayload.Verifier = [guid]::NewGuid()
+                # PKCE - code_challenge secret (minimum length 43 char, maximum length 128)
+                $codeflowPayload.Verifier = [guid]::NewGuid().guid + [guid]::NewGuid().guid
                 # Load System.Security.Cryptograaphy.SHA256
                 $hashAlgorithm = [System.Security.Cryptography.HashAlgorithm]::Create('sha256')
                 # Compute hash from secret
