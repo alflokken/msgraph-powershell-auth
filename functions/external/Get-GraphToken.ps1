@@ -205,7 +205,8 @@ function Get-GraphToken {
         }
         # Finalization of payload & delivery
         $payload.body = $requestBody
-        $response = Invoke-RestMethod @payload
+        try { $response = Invoke-RestMethod @payload }
+        catch { throw $_ }
     }
     end {
         # Append expiry_datetime to response
